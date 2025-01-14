@@ -1,10 +1,12 @@
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('todoState');
-    if (serializedState === null) {
-      return undefined;
-    }
-    return JSON.parse(serializedState);
+    const authState = localStorage.getItem('authState');
+    const tasksState = localStorage.getItem('tasksState');
+    
+    return {
+      auth: authState ? JSON.parse(authState) : undefined,
+      tasks: tasksState ? JSON.parse(tasksState) : undefined
+    };
   } catch (err) {
     return undefined;
   }
@@ -12,10 +14,9 @@ export const loadState = () => {
 
 export const saveState = (state) => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('todoState', serializedState);
+    localStorage.setItem('authState', JSON.stringify(state.auth));
+    localStorage.setItem('tasksState', JSON.stringify(state.tasks));
   } catch (err) {
-    // Handle errors here
     console.error('Error saving state:', err);
   }
 }; 
