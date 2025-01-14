@@ -1,0 +1,25 @@
+src/
+  ├── components/
+  │   ├── Auth/
+  │   │   ├── Login.jsx
+  │   │   └── PrivateRoute.jsx
+  │   ├── Tasks/
+  │   │   ├── TaskInput.jsx
+  │   │   ├── TaskList.jsx
+  │   │   └── TaskItem.jsx
+  │   └── Layout/
+  │       ├── Header.jsx
+  │       └── Container.jsx
+  ├── store/
+  │   ├── store.js
+  │   └── slices/
+  │       ├── authSlice.js
+  │       └── taskSlice.js
+  ├── services/
+  │   ├── weatherApi.js
+  │   └── localStorage.js
+  ├── hooks/
+  │   └── useWeather.js
+  ├── styles/
+  │   └── global.css
+  └── App.js 
