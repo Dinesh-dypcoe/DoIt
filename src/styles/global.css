@@ -17,17 +17,21 @@ body {
 .sidebar {
   width: 280px;
   background: white;
-  padding: 2rem;
+  padding: 3rem 2rem;
   border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin: 2rem 0 2rem 2rem;
+  border-radius: 12px;
 }
 
 .main-content {
   flex: 1;
-  padding: 2rem;
+  padding: 2rem 4rem;
   background: #f5f5f5;
+  margin: 2rem;
+  border-radius: 12px;
 }
 
 .user-profile {
@@ -79,8 +83,8 @@ body {
 .add-list-button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
   border: 2px dashed #ddd;
   border-radius: 8px;
   background: none;
@@ -88,9 +92,21 @@ body {
   cursor: pointer;
 }
 
+.add-list-button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.add-list-button span {
+  line-height: 1;
+  margin-top: 2px;
+}
+
 .task-list-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .add-task-button {
@@ -326,6 +342,8 @@ body {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid #eee;
+    margin: 1rem;
+    padding: 2rem 1rem;
   }
 
   .task-input-options {
@@ -340,6 +358,11 @@ body {
     width: 100%;
     justify-content: flex-end;
     margin-top: 0.5rem;
+  }
+
+  .main-content {
+    padding: 1rem;
+    margin: 1rem;
   }
 }
 
@@ -771,4 +794,514 @@ body {
 
 .set-reminder-button:not(:disabled):hover {
   background: #43A047;
+}
+
+.list-input-form {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  border: 2px dashed #ddd;
+}
+
+.list-input-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.list-input-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-input-buttons .add-button {
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.list-input-buttons .cancel-button {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+}
+
+.nav-item-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.delete-list-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #dc3545;
+  padding: 0.25rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.delete-list-button:hover {
+  opacity: 1;
+}
+
+.nav-item:hover .delete-list-button {
+  display: block;
+}
+
+.filter-button.list-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+}
+
+.filter-button-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-button .delete-list-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #dc3545;
+  padding: 0.25rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.filter-button:hover .delete-list-button {
+  display: block;
+}
+
+.filter-button .delete-list-button:hover {
+  opacity: 1;
+}
+
+/* Update filter options layout */
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.filter-options > * {
+  flex: 0 1 auto;
+}
+
+.filter-options .list-filter {
+  flex: 1 1 100%;
+}
+
+.my-lists-section {
+  width: 100%;
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.my-lists-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.my-lists-header:hover {
+  background: #f5f5f5;
+}
+
+.my-lists-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lists-count {
+  color: #999;
+  font-size: 0.875rem;
+}
+
+.lists-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 2rem;
+}
+
+.list-filter {
+  background: #f5f5f5;
+}
+
+.list-filter:hover {
+  background: #e8e8e8;
+}
+
+.list-filter.active {
+  background: #4CAF50;
+  color: white;
+}
+
+/* Add styles for icon and text alignment */
+.nav-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.nav-item span {
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.weather-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.weather-details {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.weather-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.weather-details-header h3 {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.weather-main svg {
+  font-size: 4rem;
+  color: #f4b400;
+}
+
+.weather-temp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.weather-temp .temp {
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.weather-temp .condition {
+  color: #666;
+  text-transform: capitalize;
+}
+
+.weather-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.weather-info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.weather-info-item svg {
+  color: #4CAF50;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-content .label {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.info-content .value {
+  font-weight: 500;
+}
+
+.weather-info {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.weather-info:hover {
+  transform: scale(1.05);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-button:hover {
+  background: #ffebee;
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.logout-button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.logout-button span {
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.progress-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chart-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.completion-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.completion-percentage .percentage {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.completion-percentage .label {
+  display: block;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.task-stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.stat-value.completed {
+  color: #4CAF50;
+}
+
+.stat-value.pending {
+  color: #FFA000;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error Boundary */
+.error-boundary {
+  padding: 2rem;
+  text-align: center;
+  color: #dc3545;
+  background: #ffebee;
+  border-radius: 8px;
+  margin: 1rem;
+}
+
+.task-search {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.task-search input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.task-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 16px;
+  font-size: 0.875rem;
+}
+
+.tag button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+
+.add-tag-button {
+  padding: 0.25rem 0.75rem;
+  background: none;
+  border: 1px dashed #ddd;
+  border-radius: 16px;
+  color: #666;
+  cursor: pointer;
+}
+
+.tag-input-form input {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  font-size: 0.875rem;
+}
+
+.task-export {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.export-button,
+.import-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+  color: #666;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.export-button:hover,
+.import-button:hover {
+  background: #e0e0e0;
 } 

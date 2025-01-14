@@ -7,6 +7,7 @@ import WeatherInfo from '../Weather/WeatherInfo';
 import TaskFilters from './TaskFilters';
 import TaskAssignment from './TaskAssignment';
 import TaskDetails from './TaskDetails';
+import TaskSearch from './TaskSearch';
 
 function TaskList() {
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -14,6 +15,7 @@ function TaskList() {
   const [showInput, setShowInput] = useState(false);
   const activeNav = useSelector((state) => state.tasks.activeNav);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleAddTask = (taskData) => {
     dispatch(addTask({
@@ -44,24 +46,44 @@ function TaskList() {
     dispatch(toggleTaskCompleted(taskId));
   };
 
+  const sortByPriority = (tasks) => {
+    const priorityOrder = {
+      'high': 1,
+      'medium': 2,
+      'low': 3
+    };
+
+    return [...tasks].sort((a, b) => {
+      return priorityOrder[a.priority] - priorityOrder[b.priority];
+    });
+  };
+
   const filterTasks = (tasks) => {
     const today = new Date().toISOString().split('T')[0];
+    let filteredTasks;
     
     switch (activeNav) {
       case 'today':
-        return tasks.filter(task => {
+        filteredTasks = tasks.filter(task => {
           const taskDate = task.dueDate || new Date().toISOString().split('T')[0];
           return taskDate === today;
         });
+        break;
       case 'important':
-        return tasks.filter(task => Boolean(task.important) === true);
+        filteredTasks = tasks.filter(task => Boolean(task.important) === true);
+        break;
       case 'planned':
-        return tasks.filter(task => task.dueDate);
+        filteredTasks = tasks.filter(task => task.dueDate);
+        break;
       case 'assigned':
-        return tasks.filter(task => task.assignedTo && task.assignedTo.id);
+        filteredTasks = tasks.filter(task => task.assignedTo && task.assignedTo.id);
+        break;
       default:
-        return tasks;
+        filteredTasks = tasks;
     }
+
+    // Sort the filtered tasks by priority
+    return sortByPriority(filteredTasks);
   };
 
   const getHeaderTitle = () => {
@@ -114,10 +136,24 @@ function TaskList() {
     </div>
   );
 
-  const filteredTasks = filterTasks(tasks);
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase());
+  };
+
+  const getFilteredTasks = (tasks) => {
+    let filtered = filterTasks(tasks);
+    
+    if (searchTerm) {
+      filtered = filtered.filter(task => 
+        task.text.toLowerCase().includes(searchTerm)
+      );
+    }
+    
+    return filtered;
+  };
 
   console.log('Tasks:', tasks.map(t => ({ id: t.id, text: t.text, important: t.important })));
-  console.log('Filtered Tasks:', filteredTasks.map(t => ({ id: t.id, text: t.text, important: t.important })));
+  console.log('Filtered Tasks:', getFilteredTasks(tasks).map(t => ({ id: t.id, text: t.text, important: t.important })));
 
   const getEmptyStateMessage = () => {
     switch (activeNav) {
@@ -142,6 +178,8 @@ function TaskList() {
 
       <TaskFilters />
 
+      <TaskSearch onSearch={handleSearch} />
+
       {showInput ? (
         <TaskInput onAddTask={handleAddTask} onCancel={() => setShowInput(false)} />
       ) : (
@@ -151,7 +189,7 @@ function TaskList() {
       )}
 
       <div className="tasks-section">
-        {filteredTasks.length === 0 ? (
+        {getFilteredTasks(tasks).length === 0 ? (
           <div className="empty-state">
             <p>{getEmptyStateMessage()}</p>
           </div>
@@ -159,12 +197,12 @@ function TaskList() {
           <>
             <div className="tasks-group">
               <h3>Tasks</h3>
-              {filteredTasks.filter(task => !task.completed).map(renderTask)}
+              {sortByPriority(getFilteredTasks(tasks).filter(task => !task.completed)).map(renderTask)}
             </div>
 
             <div className="tasks-group">
               <h3>Completed</h3>
-              {filteredTasks.filter(task => task.completed).map(renderTask)}
+              {sortByPriority(getFilteredTasks(tasks).filter(task => task.completed)).map(renderTask)}
             </div>
           </>
         )}

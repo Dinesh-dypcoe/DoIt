@@ -1,61 +1,56 @@
 import { useSelector } from 'react-redux';
+import { PieChart, Pie, Cell } from 'recharts';
 
 function TaskProgressChart() {
   const tasks = useSelector((state) => state.tasks.tasks);
-  const today = new Date().toISOString().split('T')[0];
+  
+  const completedTasks = tasks.filter(task => task.completed).length;
+  const totalTasks = tasks.length;
+  const pendingTasks = totalTasks - completedTasks;
+  const completionPercentage = totalTasks ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
-  // Get today's tasks
-  const todaysTasks = tasks.filter(task => {
-    const taskDate = task.dueDate || new Date().toISOString().split('T')[0];
-    return taskDate === today;
-  });
+  const data = [
+    { name: 'Completed', value: completedTasks },
+    { name: 'Pending', value: pendingTasks }
+  ];
 
-  const completedTasks = todaysTasks.filter(task => task.completed).length;
-  const totalTasks = todaysTasks.length;
-  const percentage = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
-
-  // Calculate the circle's circumference
-  const radius = 45;
-  const strokeWidth = 12;
-  const normalizedRadius = radius - strokeWidth / 2;
-  const circumference = 2 * Math.PI * normalizedRadius;
-  const strokeDasharray = `${(percentage * circumference) / 100} ${circumference}`;
+  const COLORS = ['#4CAF50', '#E0E0E0'];
 
   return (
-    <div className="task-progress-chart">
-      <svg width="120" height="120" viewBox="0 0 120 120">
-        {/* Background circle */}
-        <circle
-          cx="60"
-          cy="60"
-          r={normalizedRadius}
-          fill="none"
-          stroke="#E8F5E9"
-          strokeWidth={strokeWidth}
-        />
-        {/* Progress circle */}
-        <circle
-          cx="60"
-          cy="60"
-          r={normalizedRadius}
-          fill="none"
-          stroke="#4CAF50"
-          strokeWidth={strokeWidth}
-          strokeDasharray={strokeDasharray}
-          strokeDashoffset={circumference * 0.25}
-          transform="rotate(-90 60 60)"
-          className="progress-ring-circle"
-          strokeLinecap="round"
-        />
-      </svg>
-      <div className="progress-legend">
-        <div className="legend-item">
-          <span className="legend-dot pending"></span>
-          <span>Pending</span>
+    <div className="progress-chart">
+      <div className="chart-container">
+        <PieChart width={160} height={160}>
+          <Pie
+            data={data}
+            cx={80}
+            cy={80}
+            innerRadius={60}
+            outerRadius={75}
+            paddingAngle={2}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index]} />
+            ))}
+          </Pie>
+        </PieChart>
+        <div className="completion-percentage">
+          <span className="percentage">{completionPercentage}%</span>
+          <span className="label">Complete</span>
         </div>
-        <div className="legend-item">
-          <span className="legend-dot done"></span>
-          <span>Done</span>
+      </div>
+      <div className="task-stats">
+        <div className="stat-item">
+          <span className="stat-label">Total Tasks</span>
+          <span className="stat-value">{totalTasks}</span>
+        </div>
+        <div className="stat-item">
+          <span className="stat-label">Completed</span>
+          <span className="stat-value completed">{completedTasks}</span>
+        </div>
+        <div className="stat-item">
+          <span className="stat-label">Pending</span>
+          <span className="stat-value pending">{pendingTasks}</span>
         </div>
       </div>
     </div>
