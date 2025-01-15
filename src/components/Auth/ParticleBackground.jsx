@@ -54,17 +54,6 @@ function ParticleBackground() {
             mode: 'push'
           },
           resize: true
-        },
-        modes: {
-          grab: {
-            distance: 140,
-            line_linked: {
-              opacity: 1
-            }
-          },
-          push: {
-            particles_nb: 4
-          }
         }
       },
       retina_detect: true

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/slices/authSlice';
+import ParticleBackground from './ParticleBackground';
 
 function Login() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function Login() {
 
   return (
     <div className="login-container">
+      <ParticleBackground />
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Welcome to DoIt</h2>
         <div className="form-group">
