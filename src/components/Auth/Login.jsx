@@ -1,70 +1,67 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { login } from '../../store/slices/authSlice';
-import ParticleBackground from './ParticleBackground';
 
 function Login() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    username: ''
   });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const isDarkMode = useSelector((state) => state.theme?.isDarkMode) || false;
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
-    }
-  }, [isAuthenticated, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ 
-      name: formData.email.split('@')[0],
-      email: formData.email 
+      email: formData.email,
+      username: formData.username
     }));
-    navigate('/');
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
-    <div className="login-container" data-theme={isDarkMode ? 'dark' : 'light'}>
-      <ParticleBackground />
-      <form onSubmit={handleSubmit} className="login-form" style={{ position: 'relative', zIndex: 2 }}>
-        <h2>Login</h2>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>Welcome to DoIt</h2>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
           <input
             type="email"
-            id="email"
             name="email"
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            id="password"
             name="password"
+            placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
     </div>
   );

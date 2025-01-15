@@ -88,6 +88,14 @@ body {
   border-radius: 50%;
   margin-bottom: 1rem;
   border: 2px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--shadow-color);
 }
 
 .sidebar-nav {
@@ -1670,4 +1678,28 @@ body {
   .tasks-section .task-list.grid-view {
     grid-template-columns: 1fr;
   }
+}
+
+.login-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.login-form input::placeholder {
+  color: var(--text-secondary);
 } 

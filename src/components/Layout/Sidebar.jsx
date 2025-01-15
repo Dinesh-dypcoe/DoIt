@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
   ListAlt, 
@@ -26,7 +26,17 @@ function Sidebar({ isOpen }) {
   const lists = useSelector((state) => state.lists.lists);
   const activeNav = useSelector((state) => state.tasks.activeNav);
   const [showListInput, setShowListInput] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState('');
   const today = new Date().toISOString().split('T')[0];
+
+  useEffect(() => {
+    if (user?.username) {
+      // Use a more reliable avatar URL format
+      const username = user.username.replace(/[^a-zA-Z0-9]/g, ''); // Remove special characters
+      const url = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+      setAvatarUrl(url);
+    }
+  }, [user?.username]);
 
   // Get count of today's tasks
   const todaysTasks = tasks.filter(task => {
@@ -67,11 +77,17 @@ function Sidebar({ isOpen }) {
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="user-profile">
         <img 
-          src={profileImage}
+          src={avatarUrl || 'https://avatar.iran.liara.run/public/boy'}
           alt="Profile" 
           className="profile-image"
+          onError={(e) => {
+            // Use a more reliable fallback
+            e.target.src = 'https://avatar.iran.liara.run/public/boy';
+            // Prevent infinite error loop
+            e.target.onerror = null;
+          }}
         />
-        <h3>Hey, {user?.name || 'User'}</h3>
+        <h3>Hey, {user?.username || 'User'}</h3>
         <button className="logout-button" onClick={handleLogout}>
           <Logout />
           <span>Logout</span>
