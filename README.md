@@ -22,7 +22,7 @@ Responsive Design: Seamless experience across all devices.
 
 Frontend: React, React Router, React Redux, Recharts
 
-Styling: CSS, Tailwind CSS (if applicable)
+Styling: CSS, Tailwind CSS,etc
 
 Build Tool: Vite
 
@@ -46,6 +46,7 @@ cd DoIt
 Install dependencies:
 
 npm install
+add the weather api key in .env file
 
 Start the development server:
 
