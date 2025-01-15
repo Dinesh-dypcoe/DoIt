@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../store/slices/authSlice';
+import ParticleBackground from './ParticleBackground';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isDarkMode = useSelector((state) => state.theme?.isDarkMode) || false;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -36,8 +38,9 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
+    <div className="login-container" data-theme={isDarkMode ? 'dark' : 'light'}>
+      <ParticleBackground />
+      <form onSubmit={handleSubmit} className="login-form" style={{ position: 'relative', zIndex: 2 }}>
         <h2>Login</h2>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
