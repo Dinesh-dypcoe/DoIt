@@ -2,6 +2,10 @@
 
 DoIt is a sleek and intuitive task management application designed to help you organize and prioritize your daily tasks efficiently. Whether it's planning your day, setting reminders, or tracking progress, DoIt has got you covered!
 
+## Live Link 🌐
+Check out the live application here: [DoIt](https://do-it-sand.vercel.app/login)
+
+
 🌟 Features
 
 Add and Organize Tasks: Quickly add tasks and organize them into categories like Today, Important, and Planned.
@@ -18,11 +22,11 @@ Interactive Sidebar: Easily navigate between different task views and lists.
 
 Responsive Design: Seamless experience across all devices.
 
-🛠️ Tech Stack
+🔧 Tech Stack
 
 Frontend: React, React Router, React Redux, Recharts
 
-Styling: CSS, Tailwind CSS,etc
+Styling: CSS, Tailwind CSS, etc.
 
 Build Tool: Vite
 
@@ -46,7 +50,8 @@ cd DoIt
 Install dependencies:
 
 npm install
-add the weather api key in .env file
+
+Add the weather API key in the .env file.
 
 Start the development server:
 
@@ -56,27 +61,7 @@ Open the app in your browser:
 
 http://localhost:5173
 
-🗂️ Project Structure
 
-DoIt/
-├── src/
-│   ├── components/
-│   │   ├── Auth/
-│   │   │   └── Login.jsx
-│   │   ├── Charts/
-│   │   │   └── TaskProgressChart.jsx
-│   │   ├── Sidebar/
-│   │   │   └── Sidebar.jsx
-│   ├── store/
-│   │   └── store.js
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── public/
-│   └── favicon.ico
-├── package.json
-├── README.md
-└── vite.config.js
 
 📊 Features in Detail
 
@@ -92,7 +77,7 @@ Custom Lists: Create and manage your personalized lists.
 
 Task Progress Chart
 
-Visual representation of completed and pending tasks using a pie chart powered by recharts.
+Visual representation of completed and pending tasks using a pie chart powered by Recharts.
 
 Add Task Features
 
@@ -107,17 +92,11 @@ Build the application:
 npm run build
 
 Deploy the dist/ folder using services like Netlify, Vercel, or GitHub Pages.
-.
 
-📄 License
+📜 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-🤝 Acknowledgments
-
-Inspired by Microsoft To-Do and other task management tools.
-
-Special thanks to the React community for their excellent documentation and support.
 
 📧 Contact
 
