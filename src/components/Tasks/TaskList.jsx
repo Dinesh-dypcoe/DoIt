@@ -16,6 +16,7 @@ function TaskList() {
   const activeNav = useSelector((state) => state.tasks.activeNav);
   const [selectedTask, setSelectedTask] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const isGridView = useSelector(state => state.view.isGridView);
 
   const handleAddTask = (taskData) => {
     dispatch(addTask({
@@ -177,7 +178,6 @@ function TaskList() {
       </div>
 
       <TaskFilters />
-
       <TaskSearch onSearch={handleSearch} />
 
       {showInput ? (
@@ -197,12 +197,16 @@ function TaskList() {
           <>
             <div className="tasks-group">
               <h3>Tasks</h3>
-              {sortByPriority(getFilteredTasks(tasks).filter(task => !task.completed)).map(renderTask)}
+              <div className={`task-list ${isGridView ? 'grid-view' : ''}`}>
+                {sortByPriority(getFilteredTasks(tasks).filter(task => !task.completed)).map(renderTask)}
+              </div>
             </div>
 
             <div className="tasks-group">
               <h3>Completed</h3>
-              {sortByPriority(getFilteredTasks(tasks).filter(task => task.completed)).map(renderTask)}
+              <div className={`task-list ${isGridView ? 'grid-view' : ''}`}>
+                {sortByPriority(getFilteredTasks(tasks).filter(task => task.completed)).map(renderTask)}
+              </div>
             </div>
           </>
         )}

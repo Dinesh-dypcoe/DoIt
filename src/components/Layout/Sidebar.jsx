@@ -19,7 +19,7 @@ import { addList, removeList } from '../../store/slices/listSlice';
 import { logout } from '../../store/slices/authSlice';
 import ListInput from '../Lists/ListInput';
 
-function Sidebar() {
+function Sidebar({ isOpen }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -64,7 +64,7 @@ function Sidebar() {
   };
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="user-profile">
         <img 
           src={profileImage}
