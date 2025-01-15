@@ -299,6 +299,9 @@ body {
   --danger-color: #dc3545;
   --warning-color: #ffc107;
   --success-color: #28a745;
+  --sidebar-width: 280px;
+  --navbar-height: 64px;
+  --container-padding: 2rem;
 }
 
 [data-theme='dark'] {
@@ -1737,4 +1740,166 @@ body {
 .login-form button {
   position: relative;
   z-index: 3;
+}
+
+/* Base responsive styles */
+@media (max-width: 1200px) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 240px;
+    --navbar-height: 56px;
+    --container-padding: 1rem;
+  }
+}
+
+/* Responsive layout adjustments */
+.main-content {
+  margin-top: var(--navbar-height);
+  padding: var(--container-padding);
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  min-height: calc(100vh - var(--navbar-height));
+  width: 100%;
+}
+
+.main-content.sidebar-open {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+}
+
+/* Sidebar responsive */
+.sidebar {
+  left: calc(-1 * var(--sidebar-width));
+  top: var(--navbar-height);
+  width: var(--sidebar-width);
+  padding: var(--container-padding);
+}
+
+/* Task list responsive */
+.task-list-container {
+  padding: 0 var(--container-padding);
+}
+
+/* Grid view responsive */
+.tasks-section .task-list.grid-view {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .main-content.sidebar-open {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .sidebar.open {
+    left: 0;
+    width: 100%;
+  }
+
+  .task-list-container {
+    padding: 0;
+  }
+
+  .tasks-section {
+    padding: 1rem;
+  }
+
+  .task-item {
+    padding: 1rem;
+  }
+
+  /* Adjust form elements for mobile */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem;
+  }
+
+  /* Login form mobile styles */
+  .login-form {
+    width: 95%;
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 0.75rem;
+  }
+
+  .navbar {
+    padding: 0 0.75rem;
+  }
+
+  .nav-logo {
+    height: 24px;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .task-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .task-filters {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .tasks-section .task-list.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  .task-list-container {
+    max-width: 900px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  .task-list-container {
+    max-width: 1400px;
+  }
+
+  .tasks-section .task-list.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+/* Print styles */
+@media print {
+  .sidebar,
+  .navbar {
+    display: none;
+  }
+
+  .main-content {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
 } 
