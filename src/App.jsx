@@ -16,10 +16,19 @@ function App() {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <div className="app" data-theme={isDarkMode ? 'dark' : 'light'}>
       {isAuthenticated && <Navbar onMenuClick={toggleSidebar} />}
-      {isAuthenticated && <Sidebar isOpen={isSidebarOpen} />}
+      {isAuthenticated && (
+        <Sidebar 
+          isOpen={isSidebarOpen} 
+          onClose={closeSidebar}
+        />
+      )}
       <main className={`main-content ${isAuthenticated && isSidebarOpen ? 'sidebar-open' : ''}`}>
         <Routes>
           <Route path="/login" element={

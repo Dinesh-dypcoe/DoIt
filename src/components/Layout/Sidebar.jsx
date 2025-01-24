@@ -19,7 +19,7 @@ import { addList, removeList } from '../../store/slices/listSlice';
 import { logout } from '../../store/slices/authSlice';
 import ListInput from '../Lists/ListInput';
 
-function Sidebar({ isOpen }) {
+function Sidebar({ isOpen, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const tasks = useSelector((state) => state.tasks.tasks);
@@ -54,11 +54,19 @@ function Sidebar({ isOpen }) {
 
   const handleNavClick = (navId) => {
     dispatch(setActiveNav(navId));
+    // Close sidebar on mobile when nav item is clicked
+    if (window.innerWidth <= 768) {
+      onClose();
+    }
   };
 
   const handleAddList = (newList) => {
     dispatch(addList(newList));
     setShowListInput(false);
+    // Close sidebar on mobile when new list is added
+    if (window.innerWidth <= 768) {
+      onClose();
+    }
   };
 
   const handleDeleteList = (e, listId) => {
